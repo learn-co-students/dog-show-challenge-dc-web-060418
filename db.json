@@ -8,25 +8,25 @@
     },
     {
       "id": 2,
-      "name": "Teddy",
-      "breed": "Rhodesian Ridgeback",
-      "gender": "female"
+      "name": "Buster",
+      "breed": "German",
+      "gender": "male"
     },
     {
       "id": 3,
-      "name": "Snickers",
-      "breed": "Dachshund",
-      "gender": "female"
+      "name": "Rover",
+      "breed": "Irish Spaniel",
+      "gender": "male"
     },
     {
       "id": 4,
-      "name": "Harvey",
+      "name": "hello",
       "breed": "Irish Spaniel",
       "gender": "male"
     },
     {
       "id": 5,
-      "name": "Gracie",
+      "name": "1234",
       "breed": "Miniature Pinscher",
       "gender": "female"
     },
@@ -44,9 +44,9 @@
     },
     {
       "id": 8,
-      "name": "Chloe",
-      "breed": "Dandie Terrier",
-      "gender": "male"
+      "name": "1234",
+      "breed": "Miniature Pinscher",
+      "gender": "female"
     },
     {
       "id": 9,

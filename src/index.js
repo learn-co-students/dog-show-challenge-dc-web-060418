@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllDogs()
+    submitDogHandler(document.getElementById("dog-form"))
 })
 
 function fetchAllDogs(){
@@ -19,30 +20,34 @@ function render(dog){
     tableRow.id = dog.id
     tableRow.innerHTML = `<tr><td id="name-${dog.id}">${dog.name}</td> <td id="breed-${dog.id}">${dog.breed}</td> <td id="gender-${dog.id}">${dog.gender}</td> <td><button id="${dog.id}-button">Edit Dog</button></td></tr>`
     document.getElementById("table-body").appendChild(tableRow)
-    let button = tableRow.querySelector("button")
-    editDogHandler(button, dog.name, dog.breed, dog.gender)
+    let button = document.getElementById(`${dog.id}-button`)
+    editDogHandler(button)
     
     
 
 }
 
-function editDogHandler(node, name, breed, gender) {
+function editDogHandler(node) {
     node.addEventListener("click", function(e){
-        document.getElementById("name-input").value = name
-        document.getElementById("breed-input").value = breed
-        document.getElementById("sex-input").value = gender
-        const form = document.getElementById("dog-form")
+        e.preventDefault()
         const id = parseInt(node.id)
-        submitDogHandler(form, id)
+        const name = document.getElementById(`name-${id}`)
+        const breed = document.getElementById(`breed-${id}`)
+        const gender = document.getElementById(`gender-${id}`)
+        document.getElementById(`name-input`).value = name.innerText
+        document.getElementById(`breed-input`).value = breed.innerText
+        document.getElementById("sex-input").value = gender.innerText
+        const submit = document.getElementById("submit-input")
+        submit.dataset.id = id
     })
 }
 
-function submitDogHandler(node, id) {
+function submitDogHandler(node) {
     node.addEventListener("submit", function(e){
         e.preventDefault()
-        let tr = document.getElementById(id)
+        let id = e.target.submit.dataset.id
         let data = {
-            id: id,
+            id: parseInt(id),
             name: e.target.name.value,
             breed: e.target.breed.value,
             gender: e.target.sex.value
@@ -56,8 +61,11 @@ function submitDogHandler(node, id) {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             reRender(data)
             document.getElementById("dog-form").reset()
+            const submit = document.getElementById("submit-input")
+        submit.dataset.id = ""
         })
 
     
@@ -68,6 +76,8 @@ function submitDogHandler(node, id) {
 function reRender(data){
     let tr = document.getElementById(data.id)
     tr.innerHTML = `<tr><td id="name-${data.id}">${data.name}</td> <td id="breed-${data.id}">${data.breed}</td> <td id="gender-${data.id}">${data.gender}</td> <td><button id="${data.id}-button">Edit Dog</button></td></tr>`
+    let button = document.getElementById(`${data.id}-button`)
+    editDogHandler(button)
 }
 
 
